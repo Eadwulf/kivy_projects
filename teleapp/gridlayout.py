@@ -107,8 +107,13 @@ class GridLayoutApp(App):
         result = 1.0
 
         if textinput_object_list:
-            for parameter in textinput_object_list:
-                result *= float(eval(parameter.text))
+            for (index, parameter) in enumerate(self.parameters):
+                if index == 1:
+                    tr = float(eval(textinput_object_list[index-1].text))
+                    te = float(eval(textinput_object_list[index].text))
+                    result *= 3600 / (tr + te)
+                else:
+                    result *= float(eval(textinput_object_list[index].text))
                 
         self.solution_textinput.text = f'{result:.2f}'
 
