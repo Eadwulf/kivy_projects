@@ -5,13 +5,17 @@ from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.anchorlayout import AnchorLayout
+from kivy.uix.floatlayout import FloatLayout
 
 from kivy.uix.label import Label
+from kivy.uix.image import Image
 from kivy.uix.button import Button
 from kivy.uix.textinput import TextInput
 
 
 class GridLayoutApp(App):
+
+    label_colors = [0, 0, 0, 0.9]
 
     parameters = [
        'T. Reparto (TR)',
@@ -37,9 +41,12 @@ class GridLayoutApp(App):
 
     def build(self):
 
+        row_two_floatlayout = FloatLayout()
+
         # Create a Label Widget to hold functions' title
         self.title_label = Label(
-            text = 'CÁLCULO DE ALIMENTACIÓN EN BASE A VALORES TEÓRICOS'
+            text = 'CÁLCULO DE ALIMENTACIÓN EN BASE A VALORES TEÓRICOS',
+           color = self.label_colors,
         )
 
         # Create an AnchorLayout to hold label_title
@@ -96,7 +103,11 @@ class GridLayoutApp(App):
 
         # Add parameters' labels
         for parameter in self.parameters:
-            self.params_gridlayout.add_widget(Label(text = parameter))
+            self.params_gridlayout.add_widget(Label(
+                text = parameter,
+                color = self.label_colors,
+            )
+        )
 
         # Add parameters' InputText widgets
         for parameter in self.parameters:
@@ -112,7 +123,8 @@ class GridLayoutApp(App):
         ###
         # Create a Label Widget to hold functions' title
         self.title_label_row_two = Label(
-            text = 'CÁLCULO DE ALIMENTACIÓN EN BASE A VALORES TOMADOS EN CAMPO'
+            text = 'CÁLCULO DE ALIMENTACIÓN EN BASE A VALORES TOMADOS EN CAMPO',
+            color = self.label_colors,
         )
 
         # Create an AnchorLayout to hold label_title
@@ -166,7 +178,11 @@ class GridLayoutApp(App):
 
         # Add parameters' labels
         for parameter in self.parameters_row_two:
-            self.params_gridlayout_row_two.add_widget(Label(text = parameter))
+            self.params_gridlayout_row_two.add_widget(Label(
+                text = parameter,
+                color = self.label_colors,
+            )
+        )
 
         # Add parameters' InputText widgets
         for parameter in self.parameters_row_two:
@@ -214,8 +230,16 @@ class GridLayoutApp(App):
         main_gridlayout.add_widget(self.solution_anchorlayout_row_two)
         main_gridlayout.add_widget(self.button_anchorlayout_row_two)
 
+        floatlayout = FloatLayout()
+        
+        background_img = Image(
+                source='C:\\Users\\Confremar\\workspace\\img\\PISCMA\\01.jpg'
+        )
+        floatlayout.add_widget(background_img)
+        floatlayout.add_widget(main_gridlayout)
 
-        return main_gridlayout
+
+        return floatlayout
 
     def on_pressed_calcular(self, instance):
         textinput_object_list = self.parameters_inputtext_list
